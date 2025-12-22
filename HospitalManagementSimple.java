@@ -108,3 +108,115 @@ public class HospitalManagementSimple {
             for (Appointment a : appointments)
                 System.out.println(a);
     }
+ private static void createBill(Scanner sc) {
+        String patientId = ask(sc, "Patient ID: ");
+        String service = ask(sc, "Service: ");
+        int amount = askInt(sc, "Amount (BDT): ");
+        String status = ask(sc, "Payment Status: ");
+        String notes = ask(sc, "Notes: ");
+        String id = "B-" + (++bSeq);
+        Bill b = new Bill(id, patientId, service, amount, status, notes);
+        bills.add(b);
+        System.out.println(b);
+    }
+
+    private static void listBills() {
+        if (bills.isEmpty())
+            System.out.println("No bills");
+        else
+            for (Bill b : bills)
+                System.out.println(b);
+    }
+
+    private static String ask(Scanner sc, String prompt) {
+        System.out.print(prompt);
+        String s = sc.nextLine().trim();
+        return s.isEmpty() ? ask(sc, prompt) : s;
+    }
+
+    private static int askInt(Scanner sc, String prompt) {
+        System.out.print(prompt);
+        String s = sc.nextLine().trim();
+        try {
+            return Integer.parseInt(s);
+        } catch (Exception e) {
+            return askInt(sc, prompt);
+        }
+    }
+
+    static class Patient {
+        final String id, name, phone, gender, nid, address, bloodGroup, notes;
+        final int age;
+
+        Patient(String id, String name, String phone, int age, String gender, String nid, String address,
+                String bloodGroup, String notes) {
+            this.id = id;
+            this.name = name;
+            this.phone = phone;
+            this.age = age;
+            this.gender = gender;
+            this.nid = nid;
+            this.address = address;
+            this.bloodGroup = bloodGroup;
+            this.notes = notes;
+        }
+
+        public String toString() {
+            return id + " | " + name + " | " + phone + " | age:" + age + " | " + gender + " | NID:" + nid + " | "
+                    + address + " | BG:" + bloodGroup + (notes.isEmpty() ? "" : " | " + notes);
+        }
+    }
+
+    static class Doctor {
+        final String id, name, department, phone, availability;
+
+        Doctor(String id, String name, String department, String phone, String availability) {
+            this.id = id;
+            this.name = name;
+            this.department = department;
+            this.phone = phone;
+            this.availability = availability;
+        }
+
+        public String toString() {
+            return id + " | " + name + " — " + department + " — " + availability + " | " + phone;
+        }
+    }
+
+    static class Appointment {
+        final String id, patientId, doctor, date, time, status;
+
+        Appointment(String id, String patientId, String doctor, String date, String time, String status) {
+            this.id = id;
+            this.patientId = patientId;
+            this.doctor = doctor;
+            this.date = date;
+            this.time = time;
+            this.status = status;
+        }
+
+        public String toString() {
+            return id + " | " + patientId + " -> " + doctor + " | " + date + " " + time + " | " + status;
+        }
+    }
+
+    static class Bill {
+        final String id, patientId, service, status, notes;
+        final int amount;
+
+        Bill(String id, String patientId, String service, int amount, String status, String notes) {
+            this.id = id;
+            this.patientId = patientId;
+            this.service = service;
+            this.amount = amount;
+            this.status = status;
+            this.notes = notes;
+        }
+
+        public String toString() {
+            return id + " | " + patientId + " | " + service + " | ৳" + amount + " | " + status
+                    + (notes.isEmpty() ? "" : " | " + notes);
+        }
+    }
+}
+
