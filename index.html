@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Hospital Management (Starter)</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+	<header class="topbar">
+		<div class="brand">
+			<div class="logo">H+</div>
+			<div>
+				<h1>Hospital Management</h1>
+				<p class="muted">Simple starter UI (HTML + CSS)</p>
+			</div>
+		</div>
+
+		<nav class="nav">
+			<a href="#dashboard">Dashboard</a>
+			<a href="#patients">Patients</a>
+			<a href="#doctors">Doctors</a>
+			<a href="#appointments">Appointments</a>
+			<a href="#billing">Billing</a>
+		</nav>
+	</header>
+
+	<main class="container">
+
+		<!-- Dashboard -->
+		<section id="dashboard" class="card">
+			<div class="card-head">
+				<h2>Dashboard</h2>
+				<span class="badge">UI only</span>
+			</div>
+
+			<div class="stats">
+				<div class="stat">
+					<p class="stat-title">Total Patients</p>
+					<p class="stat-value">—</p>
+				</div>
+				<div class="stat">
+					<p class="stat-title">Doctors</p>
+					<p class="stat-value">—</p>
+				</div>
+				<div class="stat">
+					<p class="stat-title">Today Appointments</p>
+					<p class="stat-value">—</p>
+				</div>
+				<div class="stat">
+					<p class="stat-title">Pending Bills</p>
+					<p class="stat-value">—</p>
+				</div>
+			</div>
+
+			<p class="hint">
+				Real-time data will appear after the backend is connected.
+			</p>
+		</section>
+
+		<!-- Patients -->
+		<section id="patients" class="card">
+			<div class="card-head">
+				<h2>Patients</h2>
+				<p class="muted">Add a patient — Bangladeshi form</p>
+			</div>
+
+			<form class="form">
+				<div class="grid">
+					<label>
+						Full Name
+						<input type="text" placeholder="e.g., Rahim Uddin" />
+					</label>
+
+					<label>
+						Phone
+						<input type="tel" placeholder="e.g., +8801XXXXXXXXX" pattern="^(\+?8801|01)[3-9]\d{8}$" />
+					</label>
+
+					<label>
+						Age
+						<input type="number" placeholder="e.g., 22" />
+					</label>
+
+					<label>
+						National ID (NID)
+						<input type="text" placeholder="e.g., 1234 5678 9012" />
+					</label>
+
+					<label>
+						Gender
+						<select>
+							<option>Select</option>
+							<option>Male</option>
+							<option>Female</option>
+							<option>Other</option>
+						</select>
+					</label>
+
+					<label class="span-2">
+						Address
+						<input type="text" placeholder="e.g., District, Upazila/Thana" />
+					</label>
+
+					<label>
+						Blood Group
+						<select>
+							<option>Select</option>
+							<option>A+</option>
+							<option>A-</option>
+							<option>B+</option>
+							<option>B-</option>
+							<option>O+</option>
+							<option>O-</option>
+							<option>AB+</option>
+							<option>AB-</option>
+						</select>
+					</label>
+
+					<label class="span-2">
+						Symptoms / Notes
+						<textarea rows="3" placeholder="e.g., fever, headache..."></textarea>
+					</label>
+				</div>
+
+				<div class="actions">
+					<button type="button" class="btn">Add Patient</button>
+					<button type="reset" class="btn btn-ghost">Clear</button>
+				</div>
+			</form>
+
+			<hr class="sep"/>
+
+			<h3 class="subhead">Patient List</h3>
+			<div class="table-wrap">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Phone</th>
+							<th>Age</th>
+							<th>Gender</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="6" class="muted">No patients yet — use the form above to add one.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<!-- Doctors -->
+		<section id="doctors" class="card">
+			<div class="card-head">
+				<h2>Doctors</h2>
+				<p class="muted">Add a doctor (form UI)</p>
+			</div>
+
+			<form class="form">
+				<div class="grid">
+					<label>
+						Doctor Name
+						<input type="text" placeholder="e.g., Dr. Ahmed" />
+					</label>
+
+					<label>
+						Department
+						<select>
+							<option>Select</option>
+							<option>Medicine</option>
+							<option>Cardiology</option>
+							<option>Orthopedics</option>
+							<option>Pediatrics</option>
+							<option>Gynecology</option>
+						</select>
+					</label>
+
+					<label>
+						Phone
+						<input type="tel" placeholder="e.g., +8801XXXXXXXXX" pattern="^(\+?8801|01)[3-9]\d{8}$" />
+					</label>
+
+					<label>
+						Availability
+						<input type="text" placeholder="e.g., Sun-Thu 6pm-9pm" />
+					</label>
+				</div>
+
+				<div class="actions">
+					<button type="button" class="btn">Add Doctor</button>
+					<button type="reset" class="btn btn-ghost">Clear</button>
+				</div>
+			</form>
+
+			<hr class="sep"/>
+
+			<h3 class="subhead">Doctor List</h3>
+			<p class="muted">No doctors listed yet — add a doctor above.</p>
+		</section>
+
+		<!-- Appointments -->
+		<section id="appointments" class="card">
+			<div class="card-head">
+				<h2>Appointments</h2>
+				<p class="muted">Book an appointment (form UI)</p>
+			</div>
+
+			<form class="form">
+				<div class="grid">
+					<label>
+						Patient ID
+						<input type="text" placeholder="e.g., P-101" />
+					</label>
+
+					<label>
+						Doctor
+						<select>
+							<option>Select</option>
+							<option>Dr. Ahmed (Medicine)</option>
+							<option>Dr. Sultana (Pediatrics)</option>
+							<option>Dr. Hasan (Orthopedics)</option>
+						</select>
+					</label>
+
+					<label>
+						Date
+						<input type="date" />
+					</label>
+
+					<label>
+						Time
+						<input type="time" />
+					</label>
+
+					<label class="span-2">
+						Reason
+						<input type="text" placeholder="e.g., regular checkup" />
+					</label>
+				</div>
+
+				<div class="actions">
+					<button type="button" class="btn">Create Appointment</button>
+					<button type="reset" class="btn btn-ghost">Clear</button>
+				</div>
+			</form>
+
+			<hr class="sep"/>
+
+			<h3 class="subhead">Upcoming</h3>
+			<div class="table-wrap">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Appt ID</th>
+							<th>Patient</th>
+							<th>Doctor</th>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="6" class="muted">No upcoming appointments yet — create one using the form above.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<!-- Billing -->
+		<section id="billing" class="card">
+			<div class="card-head">
+				<h2>Billing</h2>
+				<p class="muted">Create a bill</p>
+			</div>
+
+			<form class="form">
+				<div class="grid">
+					<label>
+						Patient ID
+						<input type="text" placeholder="e.g., P-101" />
+					</label>
+
+					<label>
+						Service
+						<select>
+							<option>Select</option>
+							<option>Doctor Consultation</option>
+							<option>Emergency</option>
+							<option>Lab Test</option>
+							<option>Medicine</option>
+							<option>Room Charge</option>
+						</select>
+					</label>
+
+					<label>
+						Amount (৳ BDT)
+						<input type="number" placeholder="e.g., 500" />
+					</label>
+
+					<label>
+						Payment Status
+						<select>
+							<option>Select</option>
+							<option>Unpaid</option>
+							<option>Paid</option>
+						</select>
+					</label>
+
+					<label class="span-2">
+						Notes
+						<input type="text" placeholder="e.g., includes discount" />
+					</label>
+				</div>
+
+				<div class="actions">
+					<button type="button" class="btn">Generate Bill</button>
+					<button type="reset" class="btn btn-ghost">Clear</button>
+				</div>
+			</form>
+
+			<hr class="sep"/>
+
+			<h3 class="subhead">Bills</h3>
+			<div class="table-wrap">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Bill ID</th>
+							<th>Patient</th>
+							<th>Service</th>
+							<th>Amount</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="5" class="muted">No bills yet — generate a bill using the form above.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<footer class="footer">
+			<p class="muted">  Starter UI. Next step: connect Java backend + database. </p>
+		</footer>
+
+	</main>
+
+</body>
+</html>
