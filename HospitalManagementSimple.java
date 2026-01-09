@@ -196,7 +196,7 @@ public class HospitalManagementSimple {
         }
 
         public String toString() {
-            return id + " | " + patientId + " -> " + doctor + " | " + date + " " + time + " | " + status;
+            return id + " | " + patientId + " ->  " + doctor + " | " + date + "  " + time + " | " + status;
         }
     }
 
@@ -214,9 +214,10 @@ public class HospitalManagementSimple {
         }
 
         public String toString() {
-            return id + " | " + patientId + " | " + service + " | ৳" + amount + " | " + status
-                    + (notes.isEmpty() ? "" : " | " + notes);
+            return id + "  |  " + patientId + "  |  " + service + "  | bdt " + amount + "  |  " + tatus
+                    + (notes.isEmpty() ? " " :  "  |  "  + notes);
         }
     }
 }
+
 
