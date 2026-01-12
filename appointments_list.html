@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments List</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="../patients/patients_list.html">View Patients</a>
+            <a href="appointment_add.html">Schedule Appointment</a>
+        </div>
+        
+        <h1>Appointments List</h1>
+        
+        <table id="appointmentsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Doctor</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function loadAppointments() {
+            fetch('../../backend/appointments/fetch.php')
+            .then(response => response.json())
+            .then(data => {
+                let tbody = document.querySelector('#appointmentsTable tbody');
+                tbody.innerHTML = '';
+                
+                if (data.length > 0) {
+                    data.forEach(appointment => {
+                        tbody.innerHTML += `
+                            <tr>
+                                <td>${appointment.id}</td>
+                                <td>${appointment.patient_name}</td>
+                                <td>${appointment.appointment_date}</td>
+                                <td>${appointment.appointment_time}</td>
+                                <td>${appointment.doctor_name}</td>
+                                <td>${appointment.reason}</td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No appointments found</td></tr>';
+                }
+            });
+        }
+        
+        loadAppointments();
+        setInterval(loadAppointments, 5000);
+    </script>
+</body>
+</html>

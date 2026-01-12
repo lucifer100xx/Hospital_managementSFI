@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients List</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="patient_add.html">Add Patient</a>
+            <a href="../appointments/appointments_list.html">Appointments</a>
+        </div>
+        
+        <h1>Patients List</h1>
+        <table id="patientsTable">  
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Patient data will be populated here -->
+            </tbody>
+
+    <script>
+        function loadPatients() {
+            fetch('../../backend/patients/fetch.php')
+            .then(response => response.json())
+            .then(data => {
+                let tbody = document.querySelector('#patientsTable tbody');
+                tbody.innerHTML = '';
+                
+                if (data.length > 0) {
+                    data.forEach(patient => {
+                        tbody.innerHTML += `
+                            <tr>
+                                <td>${patient.id}</td>
+                                <td>${patient.name}</td>
+                                <td>${patient.age}</td>
+                                <td>${patient.phone}</td>
+                                <td>${patient.email}</td>
+                                <td>${patient.address}</td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No patients found</td></tr>';
+                }
+            });
+        }
+        
+        loadPatients();
+        setInterval(loadPatients, 5000);
+    </script>
+</body>
+</html>

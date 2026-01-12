@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Patient</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="patients_list.html">View Patients</a>
+            <a href="../appointments/appointments_list.html">Appointments</a>
+        </div>
+        
+        <h1>Add New Patient</h1>
+        <div id="message"></div>
+        
+        <form id="patientForm">
+            <div class="form-group">
+                <label>Patient Name</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Age</label>
+                <input type="number" name="age" required>
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <textarea name="address" rows="3" required></textarea>
+            </div>
+            <button type="submit">Add Patient</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('patientForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let formData = new FormData(this);
+            
+            fetch('../../backend/patients/insert.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('message').innerHTML = '<div class="success">' + data.message + '</div>';
+                    document.getElementById('patientForm').reset();
+                    setTimeout(() => {
+                        window.location.href = 'patients_list.html';
+                    }, 1500);
+                } else {
+                    document.getElementById('message').innerHTML = '<div class="error">' + data.message + '</div>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

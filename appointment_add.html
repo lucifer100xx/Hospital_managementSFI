@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Appointment</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="../patients/patients_list.html">View Patients</a>
+            <a href="appointments_list.html">View Appointments</a>
+        </div>
+        
+        <h1>Schedule Appointment</h1>
+        <div id="message"></div>
+        
+        <form id="appointmentForm">
+            <div class="form-group">
+                <label>Patient</label>
+                <select name="patient_id" id="patientSelect" required>
+                    <option value="">Select Patient</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Appointment Date</label>
+                <input type="date" name="appointment_date" required>
+            </div>
+            <div class="form-group">
+                <label>Appointment Time</label>
+                <input type="time" name="appointment_time" required>
+            </div>
+            <div class="form-group">
+                <label>Doctor Name</label>
+                <input type="text" name="doctor_name" required>
+            </div>
+            <div class="form-group">
+                <label>Reason for Visit</label>
+                <textarea name="reason" rows="3" required></textarea>
+            </div>
+            <button type="submit">Schedule Appointment</button>
+        </form>
+    </div>
+
+    <script>
+        function loadPatients() {
+            fetch('../../backend/patients/fetch.php')
+            .then(response => response.json())
+            .then(data => {
+                let select = document.getElementById('patientSelect');
+                select.innerHTML = '<option value="">Select Patient</option>';
+                
+                data.forEach(patient => {
+                    select.innerHTML += `<option value="${patient.id}">${patient.name} (${patient.phone})</option>`;
+                });
+            });
+        }
+        
+        loadPatients();
+        
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let formData = new FormData(this);
+            
+            fetch('../../backend/appointments/insert.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('message').innerHTML = '<div class="success">' + data.message + '</div>';
+                    document.getElementById('appointmentForm').reset();
+                    setTimeout(() => {
+                        window.location.href = 'appointments_list.html';
+                    }, 1500);
+                } else {
+                    document.getElementById('message').innerHTML = '<div class="error">' + data.message + '</div>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
